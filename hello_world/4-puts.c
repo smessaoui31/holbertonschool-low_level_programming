@@ -7,11 +7,7 @@
 	 *
 	 * Return :Always return to 0 (success)
 	 */
-	int main(void)
-	/**
-	 * Write a C program that prints exactly a specific line
-	 *
-	 */
+	int main(void) /*Main is the entry point*/
 {
 	puts("\"Programming is like building a multilingual puzzle");
 	return (0);
