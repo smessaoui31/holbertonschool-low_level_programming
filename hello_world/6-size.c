@@ -7,5 +7,5 @@
 int main(void)
 {
 	sizeof(int);
-	return (O);
+return (0);
 }
