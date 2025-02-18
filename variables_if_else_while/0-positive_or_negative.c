@@ -2,11 +2,11 @@
 #include <time.h>
 #include <stdio.h>
 /**
- * include means the different headers in my prog code
- * The main - my entire main in the programm
- * if means my different conditions to generate my rng
- * else meane the other conditions to my rng
- * return (0) always to success
+ *include main means the different headers(stdlib.h time.h stdio.h)
+ *main - my entire main in the programm
+ *if means my different conditions to generate my rng
+ *else meane the other conditions to my rng
+ *return (0) always to success
  */
 int main(void)
 {
