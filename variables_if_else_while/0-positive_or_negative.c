@@ -2,12 +2,11 @@
 #include <time.h>
 #include <stdio.h>
 /**
- *include main means the different headers(stdlib.h time.h stdio.h)
- *main - my entire main in the programm
- *if means my different conditions to generate my rng
- *else meane the other conditions to my rng
- *return (0) always to success
+ * main - Prints if number is positive, zero or negative
+ *
+ * Return: Always (Success)
  */
+
 int main(void)
 {
 	int n;
