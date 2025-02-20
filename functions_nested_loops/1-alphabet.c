@@ -1,9 +1,9 @@
 #include "main.h"
 /**
- * main - Prints if number is positive, zero or negative
- *
- * Return: Always (Success)
- */
+  * print_alphabet - Make the alphabet
+  *
+  * Return: void
+  */
 
 void print_alphabet(void)
 {
@@ -14,5 +14,4 @@ void print_alphabet(void)
 		_putchar(ch);
 	}
 	_putchar('\n');
-	
 }
