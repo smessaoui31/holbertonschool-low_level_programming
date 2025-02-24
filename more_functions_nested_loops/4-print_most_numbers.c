@@ -1,26 +1,27 @@
 #include "main.h"
-/**
- * print_most_numbers - print specific numbers
- *
- */
 
 
-void print_most_numbers(void)
+
+
+void print_diagonal(int n)
 {
-	char c;
+	int x, y;
 
-	for (c = 48 ; c <= 57 ; c++)
+	if (n <= 0)
 	{
-		if (c == 50)
-		{
-			continue;
-		}
-
-		else if (c == 52)
-		{
-			continue;
-		}
-		_putchar(c);
+		_putchar('\n');
 	}
-	_putchar('\n');
+	else
+	{
+		for (x = 0; x < n; x++)
+		{
+			for (y = 0; y < x; y++)
+			{
+				_putchar(32);
+			}
+
+			_putchar(92);
+			_putchar('\n');
+		}
+	}
 }
