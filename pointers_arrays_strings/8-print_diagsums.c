@@ -9,8 +9,8 @@
 void print_diagsums(int *a, int size)
 {
 	int i;
-	int somme1;
-	int somme2;
+	int somme1 = 0;
+	int somme2 = 0;
 
 	for (i = 0 ; i < size; i++)
 	{
