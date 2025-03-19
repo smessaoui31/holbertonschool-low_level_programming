@@ -3,30 +3,30 @@
 #include <stdio.h>
 /**
  * main - This function we have a two number and an operator
- * @ac: Is the length of Number of arguments
- * @av: These are the arguments
+ * @argc: Is the length of Number of arguments
+ * @argv: These are the arguments
  * Return: Return to 0
  */
-int main(int ac, char *av[])
+int main(int argc, char *argv[])
 {
 	int numb1, numb2;
 	int (*fun)(int, int);
-	char *c = av[2];
+	char *argc = argv[2];
 
-	if (ac != 4)
+	if (argc != 4)
 	{
 		printf("Error\n");
 		exit(98);
 	}
-	if ((*c != '+' && *c != '-' && *c != '*' && *c != '/' && *c != '%') ||
+	if ((*argc != '+' && *argc != '-' && *argc != '*' && *argc != '/' && *argc != '%') ||
 			*(c + 1) != 0)
 	{
 		printf("Error\n");
 		exit(99);
 	}
-	numb1 = atoi(av[1]);
-	numb2 = atoi(av[3]);
-	if ((*c == '/' || *c == '%') && numb2 == 0)
+	numb1 = atoi(argv[1]);
+	numb2 = atoi(argv[3]);
+	if ((*argc == '/' || *argc == '%') && numb2 == 0)
 	{
 		printf("Error\n");
 		exit(100);
