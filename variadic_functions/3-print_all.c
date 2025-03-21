@@ -26,7 +26,7 @@ void print_char(va_list arg)
  * @arg: A list of arguments pointing to
  *       the integer to be printed.
  */
-void print_int(va_list arg)<F9>
+void print_int(va_list arg)
 {
 	int num;
 
@@ -50,6 +50,7 @@ void print_float(va_list arg)
 /**
  * print_string - Prints a string.
  * @arg: A list of arguments pointing to
+ *       the string to be printed.
  */
 void print_string(va_list arg)
 {
