@@ -4,29 +4,16 @@
 #include <unistd.h>
 
 /**
- * error_handler - Handle errors with appropriate messages and exit codes
- * @exit_code: Exit code to use
- * @message: Error message format
- * @filename: Filename to include in error message
+ * main - copies the content of a file to another file
+ * @argc: number of arguments
+ * @argv: arguments
+ *
+ * Return: 0
  */
-void error_handler(int exit_code, const char *message, char *filename)
+int main(int argc, char **argv)
 {
-	dprintf(STDERR_FILENO, message, filename);
-	exit(exit_code);
-}
-
-/**
- * main - Program that copies the content of a file to another file
- * @argc: Number of arguments
- * @argv: Array of arguments
- * Return: 0 on success
- */
-int main(int argc, char *argv[])
-{
-	int fd_from, fd_to, close_status;
-	ssize_t bytes_read, bytes_written;
-	char buffer[1024];
-	char *file_from, *file_to;
+	char *source;
+	char *destination;
 
 	if (argc != 3)
 	{
@@ -34,40 +21,55 @@ int main(int argc, char *argv[])
 		exit(97);
 	}
 
-	file_from = argv[1];
-	file_to = argv[2];
+	source = argv[1];
+	destination = argv[2];
 
-	fd_from = open(file_from, O_RDONLY);
-	if (fd_from == -1)
-		error_handler(98, "Error: Can't read from file %s\n", file_from);
-
-	fd_to = open(file_to, O_CREAT | O_WRONLY | O_TRUNC, 0664);
-	if (fd_to == -1)
-		error_handler(99, "Error: Can't write to %s\n", file_to);
-
-	while ((bytes_read = read(fd_from, buffer, 1024)) > 0)
-	{
-		bytes_written = write(fd_to, buffer, bytes_read);
-		if (bytes_written == -1 || bytes_written != bytes_read)
-			error_handler(99, "Error: Can't write to %s\n", file_to);
-	}
-
-	if (bytes_read == -1)
-		error_handler(98, "Error: Can't read from file %s\n", file_from);
-
-	close_status = close(fd_from);
-	if (close_status == -1)
-	{
-		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd_from);
-		exit(100);
-	}
-
-	close_status = close(fd_to);
-	if (close_status == -1)
-	{
-		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd_to);
-		exit(100);
-	}
+	cp(source, destination);
 
 	return (0);
+}
+
+/**
+ * cp - copies the content of a file to another file
+ * @src: source file
+ * @dest: destination file
+ */
+void cp(const char *src, const char *dest)
+{
+	int fd_src, fd_dest, fd;
+	char buffer[1024];
+	ssize_t bytes_read = 0, bytes_written = 0;
+
+	fd_src = open(src, O_RDONLY, 0444);
+	fd_dest = open(dest, O_WRONLY | O_CREAT | O_TRUNC, 0664);
+
+	bytes_read = read(fd_src, buffer, 1024);
+
+	while (bytes_read > 0)
+	{
+		bytes_written = write(fd_dest, buffer, bytes_read);
+
+		if (fd_dest == -1 || bytes_written == -1)
+		{
+			dprintf(STDERR_FILENO, "Error: Can't write to %s\n", dest);
+			exit(99);
+		}
+
+		bytes_read = read(fd_src, buffer, 1024);
+	}
+
+	if (fd_src == -1 || bytes_read == -1)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", src);
+		exit(98);
+	}
+
+	fd = close(fd_src);
+	fd = close(fd_dest);
+
+	if (fd == -1)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't close fd %i\n", fd);
+		exit(100);
+	}
 }
